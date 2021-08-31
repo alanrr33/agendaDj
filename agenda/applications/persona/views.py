@@ -21,6 +21,9 @@ from .serializers import (
     PersonaSerializer2,
     ReunionSerializer,
     PersonaSerializer3,
+    ReunionSerializerLink,
+    PersonaPagination,
+    CountReunionSerializer,
 )
 
 class ListaPersona(ListView):
@@ -33,9 +36,10 @@ class ListaPersona(ListView):
 class PersonListApiView(ListAPIView):
 
     serializer_class=PersonSerializer
+    pagination_class=PersonaPagination
 
     def get_queryset(self):
-        return Person.objects.all()
+        return Person.objects.all().order_by('full_name')
 
 class PersonListView(TemplateView):
     template_name='persona/lista.html'
@@ -82,12 +86,25 @@ class PersonApiLista(ListAPIView):
     def get_queryset(self):
         return Person.objects.all()
 
-class ReunionApiLista(ListAPIView):
+"""class ReunionApiLista(ListAPIView):
 
-    serializer_class=ReunionSerializer
+    serializer_class=ReunionSerializer2
     
     def get_queryset(self):
         return Reunion.objects.all()
+"""
+class ReunionApiListaLink(ListAPIView):
+
+    serializer_class=ReunionSerializerLink
+    
+    def get_queryset(self):
+        return Reunion.objects.all()
+
+class ReunionByPersonJob(ListAPIView):
+    serializer_class=CountReunionSerializer
+
+    def get_queryset(self):
+        return Reunion.objects.cantidad_reuniones_job()
 
 
 

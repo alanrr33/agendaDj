@@ -10,7 +10,9 @@ from .views import (
     PersonUpdateView,
     PersonRetrieveUpdateView,
     PersonApiLista,
-    ReunionApiLista,
+    #ReunionApiLista,
+    ReunionApiListaLink,
+    ReunionByPersonJob,
     
 )
 
@@ -22,11 +24,14 @@ urlpatterns = [
     path('lista/',PersonListView.as_view(),name="lista"),
     path('api/persona/search/<kword>/',PersonSearchApiView.as_view()),
     path('api/persona/create/',PersonCreateView.as_view()),
-    path('api/persona/detail/<pk>/',PersonDetailView.as_view()),
+    path('api/persona/detail/<pk>/',PersonDetailView.as_view(),name='detalle'),
     path('api/persona/delete/<pk>/',PersonDeleteView.as_view()),
     path('api/persona/modificar/<pk>/',PersonRetrieveUpdateView.as_view()),
     path('api/personas/',PersonApiLista.as_view()),
-    path('api/reuniones/',ReunionApiLista.as_view()),
+    #path('api/reuniones/',ReunionApiLista.as_view()),
+    path('api/reuniones-link/',ReunionApiListaLink.as_view()),
+    path('api/reunion/por-job/',ReunionByPersonJob.as_view()),
+    
 
     
 
